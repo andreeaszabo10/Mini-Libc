@@ -1,27 +1,45 @@
-# MiniShell
+Copyright Szabo Cristina-Andreea
+# Mini Libc
 
-MiniShell is a minimal, custom-built shell for Unix-like systems, designed to execute built-in commands, manage external processes, and support input/output redirection and pipelines. This shell mimics basic shell functionalities, supporting common operations such as executing commands, file redirection, and process management. It also includes support for parallel and conditional execution of commands.
+## Overview
+
+Mini Libc is an implementation of a subset of standard C library functionalities, designed for freestanding environments that avoid external dependencies on a full libc. This project provides essential system calls, memory management, string manipulation, file I/O operations, and sleep functions, tailored for low-level systems programming or embedded system development.
 
 ## Features
 
-- **Built-in Commands**:
-  - `cd <directory>`: Changes the current working directory.
-  - `pwd`: Prints the current working directory.
-  - `exit`: Exits the shell.
-  
-- **Environment Variable Support**: Support for environment variables like `$HOME`, `$PATH`, etc.
+- **String Manipulation**:  
+  Implements essential string functions, including:
+  - `strcpy()`: Copy strings.
+  - `strcat()`: Concatenate strings.
+  - `strlen()`: Calculate the length of a string.
 
-- **Execution of External Commands**: Commands that are not built-in are executed using `execvp()`, with support for argument passing, variable expansion and execution of any valid external commands like `ls`, `cat`, `echo`, etc.
+- **Memory Allocation**:  
+  Provides basic memory management:
+  - `malloc()`: Allocate memory.
+  - `free()`: Free allocated memory.
+  - `mmap()`: Memory mapping for advanced memory management.
 
-- **Input & Output Redirection**:
-  - `< file`: Reads input from a file.
-  - `> file`: Redirects output to a file (overwrites the file).
-  - `>> file`: Appends output to a file.
+- **POSIX-Compliant File I/O**:  
+  Includes fundamental file I/O operations:
+  - `open()`: Open files for reading or writing.
+  - `close()`: Close open files.
+  - `lseek()`: Seek to a specific position within a file.
 
-- **Piping** (`|`): Allows output from one command to be used as input for another. Implemented using anonymous pipes (`pipe()` and `dup2()`).
+- **Sleep Functions**:  
+  Implements time-related functions:
+  - `sleep()`: Pause execution for a specified number of seconds.
+  - `nanosleep()`: Pause execution for a specified duration in nanoseconds.
 
-- **Parallel Execution** (`&`): Runs multiple commands simultaneously. Implemented using `fork()` and waits for child processes to finish using `waitpid()`.
+- **Freestanding Implementation**:  
+  The library is designed to work without relying on an external C standard library. It is suitable for environments like operating systems or embedded systems where minimal dependencies are crucial.
 
-- **Conditional Execution** (`&&`, `||`):
-  - `&&`: Executes the second command only if the first command succeeds.
-  - `||`: Executes the second command only if the first command fails.
+## Project Structure
+
+- **Makefile**: The build script for compiling the project.
+- **errno.c**: Implements error handling, defining the `errno` variable for error tracking.
+- **syscall.c**: Contains the system call interface, allowing interaction with the kernel.
+- **string**: Implements basic string manipulation functions like `strcpy`, `strcat`, and `strlen`.
+- **mm**: Provides memory allocation functions like `malloc`, `free`, and `mmap`.
+- **process**: Manages process-related system calls.
+- **io**: Implements basic I/O operations such as `open`, `close`, and `lseek`.
+
