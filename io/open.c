@@ -7,7 +7,6 @@
 
 int open(const char *filename, int flags, ...)
 {
-	/* TODO: Implement open system call. */
     int ret = syscall(2, filename, flags);
 
     if (ret < 0) {
