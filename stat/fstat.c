@@ -6,7 +6,6 @@
 
 int fstat(int fd, struct stat *st)
 {
-	/* TODO: Implement fstat(). */
 	int ret = syscall(5, fd, st);
 
     if (ret < 0) {
