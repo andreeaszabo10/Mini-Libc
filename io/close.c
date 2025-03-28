@@ -7,7 +7,6 @@
 
 int close(int fd)
 {
-	/* TODO: Implement close(). */
 	int ret = syscall(3, fd);
 
     if (ret < 0) {
