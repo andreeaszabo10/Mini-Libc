@@ -18,8 +18,6 @@ SRCS = syscall.c \
        io/puts.c \
        process/sleep.c process/nanosleep.c
 
-# TODO: Add sleep.c and puts.c dependency.
-
 OBJS = $(patsubst %.c,%.o,$(SRCS))
 
 all: libc.a
